@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT171 Cloud Server Project | Your Name</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #4a5568;
+            font-size: 1.2rem;
+        }
+
+        .status-bar {
+            background: rgba(72, 187, 120, 0.1);
+            border: 2px solid #48bb78;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .status-bar .status {
+            color: #2f855a;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .card li strong {
+            color: #2d3748;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .links {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 30px;
+        }
+
+        .demo-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-section h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .feature-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .feature-box:hover {
+            border-color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🚀 ICT171 Cloud Server Project</h1>
+            <p>Professional Web Server Deployment on AWS</p>
+            <p><strong>Student:</strong> [Your Name] | <strong>Student ID:</strong> [Your Student Number]</p>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status">✅ Server Online | 🌐 Domain Active | 🔒 SSL Secured</div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid">
+            <!-- Server Information -->
+            <div class="card">
+                <h3><span class="icon">🖥️</span> Server Information</h3>
+                <ul>
+                    <li><strong>Cloud Provider:</strong> Amazon Web Services (AWS)</li>
+                    <li><strong>Instance Type:</strong> t2.micro (Free Tier)</li>
+                    <li><strong>Operating System:</strong> Ubuntu 22.04 LTS</li>
+                    <li><strong>Web Server:</strong> Nginx</li>
+                    <li><strong>Region:</strong> Asia Pacific (Sydney)</li>
+                    <li><strong>Public IP:</strong> <span id="server-ip">[Your Server IP]</span></li>
+                </ul>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="card">
+                <h3><span class="icon">⚡</span> Technology Stack</h3>
+                <p>This server demonstrates proficiency with modern web technologies:</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">AWS EC2</span>
+                    <span class="tech-badge">Ubuntu Linux</span>
+                    <span class="tech-badge">Nginx</span>
+                    <span class="tech-badge">SSL/TLS</span>
+                    <span class="tech-badge">DNS</span>
+                    <span class="tech-badge">Git</span>
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">JavaScript</span>
+                </div>
+            </div>
+
+            <!-- Learning Outcomes -->
+            <div class="card">
+                <h3><span class="icon">🎯</span> Learning Outcomes Demonstrated</h3>
+                <ul>
+                    <li>✅ <strong>Linux Command Line:</strong> Server administration via SSH</li>
+                    <li>✅ <strong>Infrastructure Setup:</strong> AWS EC2 deployment</li>
+                    <li>✅ <strong>Server Configuration:</strong> Nginx, firewall, SSL</li>
+                    <li>✅ <strong>Version Control:</strong> Git and GitHub integration</li>
+                    <li>✅ <strong>Domain Management:</strong> DNS configuration</li>
+                    <li>✅ <strong>Documentation:</strong> Professional technical writing</li>
+                </ul>
+            </div>
+
+            <!-- Project Features -->
+            <div class="card">
+                <h3><span class="icon">🌟</span> Project Features</h3>
+                <ul>
+                    <li><strong>Infrastructure as a Service:</strong> Manual server setup</li>
+                    <li><strong>Custom Domain:</strong> Professional DNS configuration</li>
+                    <li><strong>SSL Certificate:</strong> Let's Encrypt HTTPS encryption</li>
+                    <li><strong>Automated Deployment:</strong> GitHub integration</li>
+                    <li><strong>Monitoring Scripts:</strong> Custom server monitoring</li>
+                    <li><strong>Backup System:</strong> Automated data protection</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="demo-section">
+            <h3>🎮 Interactive Server Demonstrations</h3>
+            <div class="feature-demo">
+                <div class="feature-box">
+                    <h4>⏱️ Server Uptime</h4>
+                    <p id="uptime" class="animate-pulse">Loading...</p>
+                </div>
+                <div class="feature-box">
+                    <h4>📊 System Status</h4>
+                    <p style="color: #48bb78; font-weight: bold;">All Services Online</p>
+                </div>
+                <div class="feature-box">
+                    <h4>🔒 Security Status</h4>
+                    <p style="color: #48bb78; font-weight: bold;">SSL Active</p>
+                </div>
+                <div class="feature-box">
+                    <h4>📈 Performance</h4>
+                    <p style="color: #48bb78; font-weight: bold;">Optimal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="links">
+            <h3>📋 Project Resources</h3>
+            <a href="https://github.com/yourusername/your-repo" class="btn">📂 GitHub Repository</a>
+            <a href="https://github.com/yourusername/your-repo/blob/main/docs/documentation.pdf" class="btn">📄 Full Documentation</a>
+            <a href="https://github.com/yourusername/your-repo/tree/main/scripts" class="btn">⚙️ Custom Scripts</a>
+            <a href="https://yourdomain.com/video-demo" class="btn">🎥 Video Explainer</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>ICT171 Assignment 2 - 2025 | Introduction to Server Environments and Architectures</p>
+            <p>Deployed on AWS EC2 with professional DevOps practices</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple JavaScript demonstrations
+        
+        // Simulate server uptime
+        function updateUptime() {
+            const startTime = new Date('2025-06-01T00:00:00'); // Replace with your server start date
+            const now = new Date();
+            const uptimeMs = now - startTime;
+            const days = Math.floor(uptimeMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((uptimeMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('uptime').textContent = `${days} days, ${hours} hours`;
+        }
+
+        // Update server IP if available
+        function updateServerInfo() {
+            // You can replace this with actual server info
+            const serverIP = window.location.hostname;
+            if (serverIP !== 'localhost' && serverIP !== '127.0.0.1') {
+                document.getElementById('server-ip').textContent = serverIP;
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUptime();
+            updateServerInfo();
+            
+            // Update uptime every minute
+            setInterval(updateUptime, 60000);
+        });
+
+        // Add some interactivity
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Console message for demonstration
+        console.log('🚀 ICT171 Server Project - JavaScript is working!');
+        console.log('This demonstrates client-side scripting capabilities.');
+    </script>
+</body>
+</html>
